@@ -22,14 +22,18 @@ const processor = unified()
 
 const post_groups = ["cafe", "music"];
 
+let memo = null as any;
+
 // read from filesystem the posts from the posts folder at ../../../content/posts
 export async function getPosts() {
+	if (memo != null) return memo;
 	const posts = [] as any[];
 	for (const group of post_groups) {
 		const postsDirectory = path.join(process.cwd(), `../content/posts/${group}`)
 		const filenames = await readdir(postsDirectory)
 
 		for (const filename of filenames) {
+			if (filename.startsWith('.')) continue;
 			const filePath = path.join(postsDirectory, filename)
 			const fileContents = await readFile(filePath, 'utf8')
 
@@ -44,7 +48,22 @@ export async function getPosts() {
 			});
 		}
 	}
-
+	memo = posts;
 	return posts;
+}
 
+export async function getPostURLs() {
+	const posts = await getPosts();
+	return posts.map((p: any) => {
+		const { group, slug } = p;
+		return `/${group}/${slug}`;
+	});
+}
+
+export async function getPostURLsByGroup(group: string) {
+	const posts = await getPosts();
+	return posts.filter((p: any) => p.group === group).map((p: any) => {
+		const { slug } = p;
+		return `/${slug}`;
+	});
 }
