@@ -8,7 +8,6 @@ import { unified } from 'unified';
 import rehype_format from 'rehype-format';
 import rehype_stringify from 'rehype-stringify';
 import remark_rehype from 'remark-rehype';
-import rehype_document from 'rehype-document';
 
 
 const processor = unified()
@@ -16,7 +15,6 @@ const processor = unified()
 	.use(remark_frontmatter)
 	.use(remark_parse_frontmatter)
 	.use(remark_rehype)
-	.use(rehype_document)
 	.use(rehype_format)
 	.use(rehype_stringify)
 
@@ -66,4 +64,9 @@ export async function getPostURLsByGroup(group: string) {
 		const { slug } = p;
 		return `/${slug}`;
 	});
+}
+
+export async function getPostBySlug(slug: string) {
+	const posts = await getPosts();
+	return posts.find((p: any) => p.slug === slug);
 }

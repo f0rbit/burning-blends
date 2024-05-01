@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
 import { getPostURLs, getPosts } from "~/lib/posts";
 
 export default async function Home() {
@@ -5,7 +7,9 @@ export default async function Home() {
 	const urls = await getPostURLs();
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<pre>{JSON.stringify(urls, null, 2)}</pre>
+			{urls.map((url: string) => 
+				<Link href={url} key={url}><Button variant='link'>{url}</Button></Link>
+			)}
 			<div>{JSON.stringify(posts, null, 2)}</div>
     </main>
   );
