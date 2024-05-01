@@ -17,6 +17,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
 		<header className="flex justify-center py-2">
 			<NavBar />
 		</header>
+		<br />
 		<main className="flex justify-center">
 			{children}
 		</main>

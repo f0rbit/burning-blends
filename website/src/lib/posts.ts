@@ -35,8 +35,6 @@ export async function getPosts() {
 			const filePath = path.join(postsDirectory, filename)
 			const fileContents = await readFile(filePath, 'utf8')
 
-			console.log(fileContents);
-
 			const data = await processor.process(fileContents)
 
 			posts.push({
@@ -46,8 +44,15 @@ export async function getPosts() {
 			});
 		}
 	}
-	memo = posts;
-	return posts;
+	const sorted_posts = posts.sort((a, b) => {
+		const a_date = new Date(a.data.frontmatter.date);
+		const b_date = new Date(b.data.frontmatter.date);
+		if (a_date.getTime() === b_date.getTime()) return 0;
+		return a_date.getTime() > b_date.getTime() ? -1 : 1;
+	});
+
+	memo = sorted_posts;
+	return sorted_posts;
 }
 
 export async function getPostURLs() {
@@ -69,4 +74,9 @@ export async function getPostURLsByGroup(group: string) {
 export async function getPostBySlug(slug: string) {
 	const posts = await getPosts();
 	return posts.find((p: any) => p.slug === slug);
+}
+
+export async function getPostsByGroup(group: string) {
+	const posts = await getPosts();
+	return posts.filter((p: any) => p.group === group);
 }

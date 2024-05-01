@@ -7,17 +7,17 @@ export function NavBar() {
 	return <NavigationMenu>
 		<NavigationMenuList>
 			<NavigationMenuItem>
-				<Link href="/" passHref>
+				<Link href="/" legacyBehavior passHref>
 					<NavigationMenuLink className={navigationMenuTriggerStyle()}>Home</NavigationMenuLink>
 				</Link>
 			</NavigationMenuItem>
 			<NavigationMenuItem>
-				<Link href="/cafe" passHref>
+				<Link href="/cafe" legacyBehavior passHref>
 					<NavigationMenuLink className={navigationMenuTriggerStyle()}>Cafés</NavigationMenuLink>
 				</Link>
 			</NavigationMenuItem>
 			<NavigationMenuItem>
-				<Link href="/music" passHref>
+				<Link href="/music" legacyBehavior passHref>
 					<NavigationMenuLink className={navigationMenuTriggerStyle()}>Music</NavigationMenuLink>
 				</Link>
 			</NavigationMenuItem>
