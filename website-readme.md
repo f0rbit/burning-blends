@@ -1,1 +1,0 @@
-eventually, i want to create a minimal blog website using static site generation & good SEO metrics as a portfolio project, maybe with some cool map views for the cafe reviews. really i just want it to look dope
