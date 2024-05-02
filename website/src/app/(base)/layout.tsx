@@ -13,8 +13,6 @@ const footer_links = [
 ]
 
 export default function BaseLayout({ children }: { children: React.ReactNode }) {
-	console.log("yeah we is out here");
-
 	return <>
 		<header className="flex justify-center py-2">
 			<NavBar />
