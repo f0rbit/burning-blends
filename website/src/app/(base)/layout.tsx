@@ -23,7 +23,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
 		<main className="flex justify-center">
 			{children}
 		</main>
-		<footer className="flex justify-center">
+		<footer className="flex justify-center mb-4">
 			<nav className="flex gap-5 py-2">
 				{footer_links.map(({ href, icon, title }) => (
 					<TooltipProvider key={href}>
