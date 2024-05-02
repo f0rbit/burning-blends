@@ -13,6 +13,8 @@ const footer_links = [
 ]
 
 export default function BaseLayout({ children }: { children: React.ReactNode }) {
+	console.log("yeah we is out here");
+
 	return <>
 		<header className="flex justify-center py-2">
 			<NavBar />
@@ -24,7 +26,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
 		<footer className="flex justify-center">
 			<nav className="flex gap-5 py-2">
 				{footer_links.map(({ href, icon, title }) => (
-					<TooltipProvider>
+					<TooltipProvider key={href}>
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<Link href={href}>
