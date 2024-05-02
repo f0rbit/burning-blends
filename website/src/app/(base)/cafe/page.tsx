@@ -1,6 +1,7 @@
 import { Construction } from "lucide-react";
 import { PostCard } from "~/components/post";
 import { getPostsByGroup } from "~/lib/posts";
+import { base_url } from "~/lib/utils";
 
 export default async function CafePage() {
 	const posts = await getPostsByGroup("cafe");
@@ -14,4 +15,24 @@ export default async function CafePage() {
 			</div>
 		</div>
 	);
+}
+
+export const metadata = {
+	title: "Burning Blends - Cafe Reviews",
+	description: "Have a read of some of my reviews of the top cafés in Adelaide",
+	keywords: ["cafe", "adelaide", "coffee", "reviews"],
+	authors: [{ name: "forbit", url: "https://forbit.dev" }],
+	creator: "forbit",
+	robots: "index, follow",
+	publisher: "forbit",
+	openGraph: {
+		title: "Cafe Reviews",
+		description: "Have a read of some of my reviews of the top cafés in Adelaide",
+		type: "website",
+		siteName: "Burning Blends",
+	},
+	metadataBase: new URL(`${base_url}`),
+	alternates: {
+		canonical: '/cafe'
+	}
 }

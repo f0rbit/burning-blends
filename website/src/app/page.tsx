@@ -1,6 +1,7 @@
 import { PostCard } from "~/components/post";
 import { getPosts } from "~/lib/posts";
 import { NavBar } from "./(base)/client";
+import { base_url } from "~/lib/utils";
 
 export default async function Home() {
 	const posts = await getPosts();
@@ -20,4 +21,24 @@ export default async function Home() {
 			</main>
 		</>
 	);
+}
+
+export const metadata = {
+	title: "Burning Blends",
+	description: "I'm on a mission to find the best cafés in Adelaide. I also review music from time-to-time (and paint some of the album covers)",
+	keywords: ["cafe", "music", "adelaide", "reviews", "trendy", "hipster", "niche", "indie", "glenelg", "brighton", "adelaide music", "adelaide music scene"],
+	authors: [{ name: "forbit", url: "https://forbit.dev" }],
+	creator: "forbit",
+	robots: "index, follow",
+	publisher: "forbit",
+	openGraph: {
+		title: "Burning Blends",
+		description: "I'm on a mission to find the best cafés in Adelaide. I also review music from time-to-time (and paint some of the album covers)",
+		type: "website",
+		siteName: "Burning Blends",
+	},
+	metadataBase: new URL(`${base_url}`),
+	alternates: {
+		canonical: '/'
+	}
 }

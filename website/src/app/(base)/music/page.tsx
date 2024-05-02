@@ -1,6 +1,7 @@
 import { Construction } from "lucide-react";
 import { PostCard } from "~/components/post";
 import { getPostURLsByGroup } from "~/lib/posts";
+import { base_url } from "~/lib/utils";
 
 export default async function MusicPage() {
 	const posts = await getPostURLsByGroup("music");
@@ -14,4 +15,24 @@ export default async function MusicPage() {
 			</div>
 		</div>
 	);
+}
+
+export const metadata = {
+	title: "Burning Blends - Music Reviews",
+	description: "I paint album covers of my favourite albums with watercolour and then critically analyse and review the albums and describe what they mean to me",
+	keywords: ["music", "adelaide", "reviews"],
+	authors: [{ name: "forbit", url: "https://forbit.dev" }],
+	creator: "forbit",
+	robots: "index, follow",
+	publisher: "forbit",
+	openGraph: {
+		title: "Music Reviews",
+		description: "I paint album covers of my favourite albums with watercolour and then critically analyse and review the albums and describe what they mean to me",
+		type: "website",
+		siteName: "Burning Blends",
+	},
+	metadataBase: new URL(`${base_url}`),
+	alternates: {
+		canonical: '/music'
+	}
 }
