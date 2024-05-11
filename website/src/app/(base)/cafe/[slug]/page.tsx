@@ -1,10 +1,14 @@
 import { getPostBySlug, getPostsByGroup } from '~/lib/posts';
 import { base_url } from '~/lib/utils';
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 export default async function CafeSubPage({ params }: { params: { slug: string } }) {
 	const post = await getPostBySlug(params.slug);
 
-	return <article className="prose prose-neutral" dangerouslySetInnerHTML={{ __html: post.value }} />
+
+	return <article className="prose prose-neutral">
+		<MDXRemote source={post.value} />
+	</article>
 }
 
 export async function generateStaticParams() {

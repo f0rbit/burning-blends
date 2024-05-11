@@ -1,22 +1,8 @@
 import path from "path"
 import { readdir } from 'node:fs/promises';
 import { readFile } from 'node:fs/promises';
-import remark_parse from "remark-parse"
-import remark_frontmatter from 'remark-frontmatter'
-import remark_parse_frontmatter from 'remark-parse-frontmatter'
-import { unified } from 'unified';
-import rehype_format from 'rehype-format';
-import rehype_stringify from 'rehype-stringify';
-import remark_rehype from 'remark-rehype';
+import gray_matter from "gray-matter";
 
-
-const processor = unified()
-	.use(remark_parse)
-	.use(remark_frontmatter)
-	.use(remark_parse_frontmatter)
-	.use(remark_rehype)
-	.use(rehype_format)
-	.use(rehype_stringify)
 
 const post_groups = ["cafe", "music"];
 
@@ -33,12 +19,13 @@ export async function getPosts() {
 		for (const filename of filenames) {
 			if (filename.startsWith('.')) continue;
 			const filePath = path.join(postsDirectory, filename)
-			const fileContents = await readFile(filePath, 'utf8')
+			const contents = await readFile(filePath, 'utf8')
 
-			const data = await processor.process(fileContents)
+			const { data: frontmatter, content } = gray_matter(contents);
 
 			posts.push({
-				...data,
+				value: content,
+				data: { frontmatter },
 				slug: filename.replace('.mdx', ''),
 				group
 			});
