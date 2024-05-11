@@ -1,8 +1,7 @@
 import path from "path"
 import { readdir } from 'node:fs/promises';
 import { readFile } from 'node:fs/promises';
-import gray_matter from "gray-matter";
-
+import { compileMDX } from "next-mdx-remote/rsc";
 
 const post_groups = ["cafe", "music"];
 
@@ -21,7 +20,7 @@ export async function getPosts() {
 			const filePath = path.join(postsDirectory, filename)
 			const contents = await readFile(filePath, 'utf8')
 
-			const { data: frontmatter, content } = gray_matter(contents);
+			const { frontmatter, content } = await parse(contents)
 
 			posts.push({
 				value: content,
@@ -40,6 +39,15 @@ export async function getPosts() {
 
 	memo = sorted_posts;
 	return sorted_posts;
+}
+
+async function parse(contents: string) {
+	return await compileMDX({
+		source: contents,
+		options: {
+			parseFrontmatter: true,
+		},
+	});
 }
 
 export async function getPostURLs() {

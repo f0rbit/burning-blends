@@ -1,13 +1,11 @@
 import { getPostBySlug, getPostsByGroup } from '~/lib/posts';
 import { base_url } from '~/lib/utils';
-import { MDXRemote } from "next-mdx-remote/rsc";
 
 export default async function CafeSubPage({ params }: { params: { slug: string } }) {
 	const post = await getPostBySlug(params.slug);
 
-
 	return <article className="prose prose-neutral">
-		<MDXRemote source={post.value} />
+		{post.value}
 	</article>
 }
 
