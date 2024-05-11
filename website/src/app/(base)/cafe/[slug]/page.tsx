@@ -4,7 +4,9 @@ import { base_url } from '~/lib/utils';
 export default async function CafeSubPage({ params }: { params: { slug: string } }) {
 	const post = await getPostBySlug(params.slug);
 
-	return <article className="prose prose-neutral" dangerouslySetInnerHTML={{ __html: post.value }} />
+	return <article className="prose prose-neutral">
+		{post.value}
+	</article>
 }
 
 export async function generateStaticParams() {
