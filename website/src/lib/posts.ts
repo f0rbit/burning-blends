@@ -2,8 +2,8 @@ import path from "path"
 import { readdir } from 'node:fs/promises';
 import { readFile } from 'node:fs/promises';
 import { compileMDX } from "next-mdx-remote/rsc";
+import { post_groups } from "./types";
 
-const post_groups = ["cafe", "music"];
 
 let memo = null as any;
 
