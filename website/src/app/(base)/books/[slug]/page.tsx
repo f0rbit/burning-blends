@@ -1,7 +1,7 @@
 import { getPostBySlug, getPostsByGroup } from "~/lib/posts";
 import { base_url } from "~/lib/utils";
 
-export default async function CafeSubPage({
+export default async function BookSubPage({
   params,
 }: {
   params: { slug: string };
@@ -12,7 +12,7 @@ export default async function CafeSubPage({
 }
 
 export async function generateStaticParams() {
-  const posts = await getPostsByGroup("cafe");
+  const posts = await getPostsByGroup("books");
   return posts.map((post: any) => ({ slug: post.slug }));
 }
 
@@ -39,7 +39,7 @@ export async function generateMetadata({
     },
     metadataBase: new URL(`${base_url}`),
     alternates: {
-      canonical: `/cafe/${params.slug}`,
+      canonical: `/books/${params.slug}`,
     },
   };
 }

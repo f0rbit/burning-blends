@@ -1,14 +1,14 @@
 import { Construction } from "lucide-react";
 import { PostCard } from "~/components/post";
-import { getPostsByGroup } from "~/lib/posts";
+import { getPostURLsByGroup } from "~/lib/posts";
 import { base_url } from "~/lib/utils";
 
-export default async function CafePage() {
-  const posts = await getPostsByGroup("cafe");
+export default async function BooksPage() {
+  const posts = await getPostURLsByGroup("books");
 
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="text-3xl font-bold text-center">Cafe Reviews</h1>
+      <h1 className="text-3xl font-bold text-center">Book Reviews</h1>
       <br />
       <div className="flex flex-col items-center gap-4 justify-center">
         {posts.length === 0 ? (
@@ -24,22 +24,23 @@ export default async function CafePage() {
 }
 
 export const metadata = {
-  title: "Burning Blends - Cafe Reviews",
-  description: "Have a read of some of my reviews of the top cafés in Adelaide",
-  keywords: ["cafe", "adelaide", "coffee", "reviews"],
+  title: "Burning Blends - Book Reviews",
+  description:
+    "I'm a bit of a slow reader - but I find books have a way of speaking words that the voice can't reproduce.",
+  keywords: ["books", "adelaide", "reviews"],
   authors: [{ name: "forbit", url: "https://forbit.dev" }],
   creator: "forbit",
   robots: "index, follow",
   publisher: "forbit",
   openGraph: {
-    title: "Cafe Reviews",
+    title: "Book Reviews",
     description:
-      "Have a read of some of my reviews of the top cafés in Adelaide",
+      "I'm a bit of a slow reader - but I find books have a way of speaking words that the voice can't reproduce.",
     type: "website",
     siteName: "Burning Blends",
   },
   metadataBase: new URL(`${base_url}`),
   alternates: {
-    canonical: "/cafe",
+    canonical: "/music",
   },
 };
