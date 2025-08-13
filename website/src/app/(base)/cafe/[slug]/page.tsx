@@ -1,5 +1,6 @@
 import { getPostBySlug, getPostsByGroup } from "~/lib/posts";
 import { base_url } from "~/lib/utils";
+import MapComponent from "~/components/ui/MapComponent";
 
 export default async function CafeSubPage({
   params,
@@ -7,8 +8,14 @@ export default async function CafeSubPage({
   params: { slug: string };
 }) {
   const post = await getPostBySlug(params.slug);
+  const { location = null } = post.data.frontmatter;
 
-  return <article className="prose prose-neutral">{post.value}</article>;
+  return (
+    <article className="prose prose-neutral">
+      {location && <MapComponent location={location} />}
+      {post.value}
+    </article>
+  );
 }
 
 export async function generateStaticParams() {
