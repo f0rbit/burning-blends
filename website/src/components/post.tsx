@@ -22,13 +22,13 @@ export function PostCard({ post }: { post: any }) {
   );
 }
 
-export function Rating({ value }: { value: number }) {
+export function Rating({ value, className }: { value: number; className?: string }) {
   // out of 5
 
   return (
     <Badge
       variant="outline"
-      className="flex flex-row gap-1 items-center justify-center"
+      className={`flex flex-row gap-1 items-center justify-center ${className ?? ""}`}
     >
       <Star size={14} />
       {value.toFixed(1)}

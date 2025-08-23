@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --mapbox-popup-tip-color: #797979; /* Default color for the triangle tip */
+}
+
+.custom-popup .mapboxgl-popup-content {
+  background: #555;
+  outline: 1px solid #797979;
+  color: white;
+}
+
+.custom-popup .mapboxgl-popup-close-button {
+  right: 5px;
+}
+
+.custom-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.custom-popup.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.custom-popup.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+  border-bottom-color: var(--mapbox-popup-tip-color);
+}
+.custom-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.custom-popup.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.custom-popup.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+  border-top-color: var(--mapbox-popup-tip-color);
+}
+.custom-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  border-right-color: var(--mapbox-popup-tip-color);
+}
+.custom-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  border-left-color: var(--mapbox-popup-tip-color);
+}
+
+.mapboxgl-ctrl {
+	display: none !important;
+}

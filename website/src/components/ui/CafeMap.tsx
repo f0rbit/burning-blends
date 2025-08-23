@@ -2,10 +2,15 @@
 
 import Map, { Marker, Popup } from "react-map-gl/mapbox";
 import { useState } from "react";
-import 'mapbox-gl/dist/mapbox-gl.css';
+import "mapbox-gl/dist/mapbox-gl.css";
+import { Rating } from "~/components/post";
+import { Button } from "./button";
+import Link from "next/link";
 
 export default function CafeMap({ posts }: { posts: any[] }) {
-  const [selectedPost, setSelectedPost] = useState<null | typeof posts[0]>(null);
+  const [selectedPost, setSelectedPost] = useState<null | (typeof posts)[0]>(
+    null,
+  );
 
   return (
     <div style={{ height: "500px", marginBottom: "20px" }}>
@@ -18,6 +23,7 @@ export default function CafeMap({ posts }: { posts: any[] }) {
         style={{ width: "100%", height: "100%" }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
         mapboxAccessToken="pk.eyJ1IjoiZm9yYml0IiwiYSI6ImNtZTlhZGJ0eDBtbzYybXE0a2FqempsemMifQ.ghfgbxyGSY-fKtpkhktLgA"
+		attributionControl={false}
       >
         {posts.map((post: any) => (
           <Marker
@@ -46,12 +52,26 @@ export default function CafeMap({ posts }: { posts: any[] }) {
             longitude={selectedPost.data.frontmatter.location[1]}
             onClose={() => setSelectedPost(null)}
             closeOnClick={false}
+            className="custom-popup"
           >
-            <div>
-              <h3>{selectedPost.data.frontmatter.title}</h3>
-              <p>Date: {selectedPost.data.frontmatter.date}</p>
-              <p>Rating: {selectedPost.data.frontmatter.rating}</p>
-              <a href={`/cafe/${selectedPost.slug}`}>Read</a>
+            <div className="flex flex-col gap-2">
+              <h3 className="font-bold text-lg">
+                {selectedPost.data.frontmatter.title}
+              </h3>
+              <div className="flex flex-row gap-2 items-center">
+                <time className="text-sm text-neutral-300">
+                  {selectedPost.data.frontmatter.date}
+                </time>
+                <Rating
+                  value={selectedPost.data.frontmatter.ratings.total}
+                  className={`text-white`}
+                />
+              </div>
+              <Link href={`/cafe/${selectedPost.slug}`}>
+                <Button variant="secondary" className="w-full p-1 h-min">
+                  Read
+                </Button>
+              </Link>
             </div>
           </Popup>
         )}
