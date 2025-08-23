@@ -13,7 +13,7 @@ export default function CafeMap({ posts }: { posts: any[] }) {
   );
 
   return (
-    <div style={{ height: "500px", marginBottom: "20px" }}>
+    <div className="map-container h-[500px] mb-4">
       <Map
         initialViewState={{
           latitude: -34.9285, // Default to Adelaide

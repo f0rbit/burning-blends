@@ -13,7 +13,7 @@ export default function MapComponent({ location }: { location: [number, number] 
 
   return (
     <div
-      className="map-container"
+      className="map-container h-[400px] mb-10"
       style={{ height: "400px", marginTop: "20px" }}
     >
       <Map

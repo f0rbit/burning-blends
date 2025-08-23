@@ -36,3 +36,11 @@
 .mapboxgl-ctrl {
 	display: none !important;
 }
+
+.map-container {
+	@apply drop-shadow-lg
+}
+
+.map-container .mapboxgl-map {
+	@apply border-2 border-[#797979] rounded-2xl;
+}
