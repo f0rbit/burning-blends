@@ -3,13 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --mapbox-popup-tip-color: #797979; /* Default color for the triangle tip */
+  --mapbox-popup-tip-color: rgba(64, 64, 64, 0.8); /* Default color for the triangle tip */
 }
 
 .custom-popup .mapboxgl-popup-content {
-  background: #555;
-  outline: 1px solid #797979;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  max-width: 250px;
+}
+
+.custom-popup .mapboxgl-popup-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.custom-popup .mapboxgl-popup-close-button:hover {
+  opacity: 1;
+}
+
+.custom-popup .mapboxgl-popup-close-button svg {
+  width: 20px;
+  height: 20px;
 }
 
 .custom-popup .mapboxgl-popup-close-button {

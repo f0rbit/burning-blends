@@ -6,6 +6,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { Button } from "./button";
 import Link from "next/link";
 import { Rating } from "~/components/post";
+import { Card, CardContent, CardHeader, CardTitle } from "./card";
+import { ArrowRight, X } from "lucide-react";
 
 type MapMode = "single" | "combined";
 
@@ -94,39 +96,57 @@ export default function MapComponent(props: MapComponentProps) {
               longitude={loc.location[1]}
               anchor="center"
               onClick={() => setSelectedLocation(loc)}
-            >
-               <div className="backdrop-blur-2xl bg-neutral-500/10 hover:bg-neutral-600/70 transition-all duration-300 hover:cursor-pointer rounded-full">
-                 <RatingPill rating={loc.rating} title={loc.title} />
-               </div>
-            </Marker>
+             >
+                <div className="backdrop-blur-2xl bg-neutral-500/10 hover:bg-neutral-600/70 transition-all duration-300 hover:cursor-pointer rounded-full flex items-center justify-center">
+                  <RatingPill rating={loc.rating} title={loc.title} />
+                </div>
+             </Marker>
           ))
         )}
 
-        {props.mode === "combined" && selectedLocation && (
-          <Popup
-            latitude={selectedLocation.location[0]}
-            longitude={selectedLocation.location[1]}
-            onClose={() => setSelectedLocation(null)}
-            closeOnClick={false}
-            className="custom-popup"
-          >
-            <div className="flex flex-col gap-2">
-              <h3 className="font-bold text-lg">{selectedLocation.title}</h3>
-              <div className="flex flex-row gap-2 items-center">
-                <time className="text-sm text-neutral-300">{selectedLocation.date}</time>
-                 <Rating 
-                   value={selectedLocation.rating} 
-                   className={`text-white !border-white/30 hover:!border-white/50`} 
-                 />
-              </div>
-              <Link href={`/cafe/${selectedLocation.slug}`}>
-                <Button variant="secondary" className="w-full p-1 h-min">
-                  Read
-                </Button>
-              </Link>
-            </div>
-          </Popup>
-        )}
+          {props.mode === "combined" && selectedLocation && (
+            <Popup
+              latitude={selectedLocation.location[0]}
+              longitude={selectedLocation.location[1]}
+              onClose={() => setSelectedLocation(null)}
+              closeOnClick={false}
+              className="custom-popup mapbox-card-popup"
+              offset={[0, -10]}
+              closeButton={false}
+            >
+              <Card 
+                className="bg-neutral-800/85 border-white/10 w-[250px] relative"
+              >
+                <button 
+                  onClick={() => setSelectedLocation(null)}
+                  className="absolute top-2 right-2 text-white/70 hover:text-white transition-colors z-10"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-white/90">{selectedLocation.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex flex-row gap-2 items-center">
+                    <time className="text-sm text-neutral-300">{selectedLocation.date}</time>
+                    <Rating 
+                      value={selectedLocation.rating} 
+                      className="text-white !border-white/30 hover:!border-white/50" 
+                    />
+                  </div>
+                  <Link href={`/cafe/${selectedLocation.slug}`} className="block">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      className="w-full bg-white/10 hover:bg-white/20 text-white hover:text-white/70 border-white/20 px-3 py-1"
+                    >
+                      Read <ArrowRight className="ml-1 w-4 h-4" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </Popup>
+          )}
       </Map>
     </div>
   );
