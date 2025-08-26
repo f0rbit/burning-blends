@@ -2,6 +2,7 @@
 const nextConfig = {
   distDir: "out",
   output: "export",
+  skipTrailingSlashRedirect: true
 };
 
 export default nextConfig;

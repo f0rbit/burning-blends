@@ -47,7 +47,7 @@
     "input-otp": "^1.2.4",
     "lucide-react": "^0.376.0",
     "mapbox-gl": "^3.14.0",
-    "next": "14.2.3",
+    "next": "^14.2.3",
     "next-mdx-remote": "^0.0.0-canary-20240321205249",
     "next-themes": "^0.3.0",
     "prettier": "^3.6.2",

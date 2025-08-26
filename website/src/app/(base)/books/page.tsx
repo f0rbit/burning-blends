@@ -1,10 +1,10 @@
 import { Construction } from "lucide-react";
 import { PostCard } from "~/components/post";
-import { getPostURLsByGroup } from "~/lib/posts";
+import { getPostsByGroup } from "~/lib/posts";
 import { base_url } from "~/lib/utils";
 
 export default async function BooksPage() {
-  const posts = await getPostURLsByGroup("books");
+  const posts = await getPostsByGroup("books");
 
   return (
     <div className="flex flex-col gap-2">

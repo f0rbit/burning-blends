@@ -8,12 +8,18 @@ export default async function BookSubPage({
 }) {
   const post = await getPostBySlug(params.slug);
 
+  if (!post) {
+    return <div>No post found</div>;
+  }
+
   return <article className="prose prose-neutral">{post.value}</article>;
 }
 
 export async function generateStaticParams() {
   const posts = await getPostsByGroup("books");
-  return posts.map((post: any) => ({ slug: post.slug }));
+  return posts.length > 0 
+    ? posts.map((post: any) => ({ slug: post.slug }))
+    : [{ slug: 'no-posts' }];
 }
 
 export async function generateMetadata({
@@ -22,6 +28,15 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   const post = await getPostBySlug(params.slug);
+  
+  if (!post) {
+    return {
+      title: "Burning Blends - No Book Posts",
+      description: "No book posts are currently available.",
+      robots: "noindex, nofollow",
+    };
+  }
+
   const { title, description, keywords } = post.data.frontmatter;
   return {
     title: `Burning Blends - ${title}`,

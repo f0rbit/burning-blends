@@ -29,7 +29,7 @@ export function NavBar() {
           </Link>
         </NavigationMenuItem>
         {post_groups.map((group: PostGroup) => (
-          <NavigationMenuItem>
+          <NavigationMenuItem key={group}>
             <Link href={`/${group}`} legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 {TITLES[group]}
