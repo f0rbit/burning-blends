@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { getPostBySlug, getPostsByGroup } from "~/lib/posts";
 import { base_url } from "~/lib/utils";
 import MapComponent from "~/components/ui/MapComponent";
@@ -8,11 +9,13 @@ export default async function CafeSubPage({
   params: { slug: string };
 }) {
   const post = await getPostBySlug(params.slug);
+  if (!post) notFound();
+
   const { location = null } = post.data.frontmatter;
 
   return (
     <article className="prose prose-neutral">
-      {location && <MapComponent location={location} />}
+      {location && <MapComponent mode="single" location={location} />}
       {post.value}
     </article>
   );
@@ -29,6 +32,8 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   const post = await getPostBySlug(params.slug);
+  if (!post) notFound();
+
   const { title, description, keywords } = post.data.frontmatter;
   return {
     title: `Burning Blends - ${title}`,

@@ -2,15 +2,23 @@ import { Construction } from "lucide-react";
 import { PostCard } from "~/components/post";
 import { getPostsByGroup } from "~/lib/posts";
 import { base_url } from "~/lib/utils";
-import CafeMap from "~/components/ui/CafeMap";
+import MapComponent from "~/components/ui/MapComponent";
 
 export default async function CafePage() {
   const posts = await getPostsByGroup("cafe");
 
+  const locations = posts.map((post: any) => ({
+    location: post.data.frontmatter.location,
+    rating: post.data.frontmatter.ratings.total,
+    date: post.data.frontmatter.date,
+    title: post.data.frontmatter.title,
+    slug: post.slug
+  }));
+
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-3xl font-bold text-center">Cafe Reviews</h1>
-      <CafeMap posts={posts} />
+      <MapComponent mode="combined" locations={locations} />
       <div className="flex flex-col items-center gap-4 justify-center">
         {posts.length === 0 ? (
           <p className="flex flex-col justify-center gap-2 items-center mb-24">
